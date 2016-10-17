@@ -2,6 +2,8 @@
 
 Please check out the java files in the `src` folder and the .jsp files in the `WebContent` folder. Everything else was auto-generated and can be ignored for now.
 
+![](https://joeyjavas.files.wordpress.com/2010/05/mvc-process.png)
+
 # Downloads
 
 1. Download and install JDK 1.8 (if needed) http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
