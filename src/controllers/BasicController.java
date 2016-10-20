@@ -35,7 +35,7 @@ public class BasicController {
 		
 		//We can sent information to the jsp file using the setAttribute() method
 		//We will call the name "helloName"
-		request.setAttribute("helloName", LowerName);
+		request.setAttribute("helloName", lowerName);
 		
 		
 		//We can also set attributes to be things other than strings
