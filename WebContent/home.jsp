@@ -3,11 +3,82 @@
 <% String contextPath = request.getContextPath(); %>
 
 <jsp:include page="/includes/header.jsp" />
+<style>
+      #map {
+        height: 400px;
+        width: 100%;
+       }
+    </style>
 
 <p>
 Request a bed.
 </p>
 
+<div id="map"></div>
+    <script>
+		function initMap() {
+			
+			if (navigator.geolocation) {
+		        navigator.geolocation.getCurrentPosition(showPosition, showError);
+		    } else {
+		        console.log("Geolocation is not supported by this browser.");
+		        showPositionDefault();
+		    }
+			
+		}
+		
+		function getLocation() {
+		    
+		}
+		
+		function showPositionDefault() {
+			var position = {
+	        		coords: {
+	        			latitude: 38.6270,
+						longitude: -90.1994
+	        		}
+	        }
+	        showPosition(position);
+		}
+		
+		function showPosition(position) {
+			console.log(position);
+		    var map = new google.maps.Map(document.getElementById('map'), {
+				zoom: 7,
+				center: {lat: position.coords.latitude, lng: position.coords.longitude}
+			});
+			var marker = new google.maps.Marker({
+				position: {lat: position.coords.latitude, lng: position.coords.longitude},
+				map: map
+			});
+		}
+		
+		function showError(error) {
+		    switch(error.code) {
+		        case error.PERMISSION_DENIED:
+		            console.log("User denied the request for Geolocation.");
+		            showPositionDefault();
+		            break;
+		        case error.POSITION_UNAVAILABLE:
+		            console.log("Location information is unavailable.");
+		            showPositionDefault();
+		            break;
+		        case error.TIMEOUT:
+		            console.log("The request to get user location timed out.");
+		            showPositionDefault();
+		            break;
+		        case error.UNKNOWN_ERROR:
+		            console.log("An unknown error occurred.");
+		            showPositionDefault();
+		            break;
+		    }
+		}
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBsFbFzxam9hIy23IpUXvLgf4idAU10Wk&callback=initMap">
+    </script>
+
+<p>test</p>
 <p>
 	<form action="<%= contextPath %>/ShelterServlet?command=updateShelter" method="POST">
      	
@@ -74,8 +145,7 @@ Request a bed.
 		<input type="submit" value="Get bed">
 	</form>
 </p>
-
-
-
         
- <jsp:include page="/includes/footer.jsp" />
+<jsp:include page="/includes/footer.jsp" />
+ 
+ 
