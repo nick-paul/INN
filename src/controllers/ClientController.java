@@ -46,5 +46,14 @@ public class ClientController {
 		DBClient.newClient(client);
 		return("client/newClient.jsp");		
 	}
+	public static String getClientInfo(HttpServletRequest request) {
+		int id=stringToInt(request.getParameter("shelterID"));
+		double lat=stringToDouble(request.getParameter("lat"));
+		double lon=stringToDouble(request.getParameter("lon"));
+		request.setAttribute("shelterID", id);
+		request.setAttribute("lat",lat);
+		request.setAttribute("lon", lon);
+		return ("client/newClient.jsp");
+	}
 	
 }

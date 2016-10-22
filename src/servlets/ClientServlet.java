@@ -51,9 +51,9 @@ public class ClientServlet extends HttpServlet
     	case "newClient":
     		forwardToPage = ClientController.newClient(request);
     		break;
-    	//case "updateShelter":
-    		//forwardToPage = ShelterController.updateShelter(request);
-    		//break;
+    	case "getClientInfo":
+    		forwardToPage = ClientController.getClientInfo(request);
+    		break;
 //    	case "getPendingClientsForShelter":
 //    		forwardToPage=ClientController.getPendingClients(request);
     	default:
