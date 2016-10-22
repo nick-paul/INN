@@ -1,13 +1,97 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+
+<%@ page import ="beans.Shelter" %>
+<%@ page import ="java.util.ArrayList" %>
 <% String contextPath = request.getContextPath(); %>
+<% ArrayList<Shelter> shelters = new ArrayList<Shelter>(); %>
 
 <jsp:include page="/includes/header.jsp" />
+<style>
+      #map {
+        height: 400px;
+        width: 100%;
+       }
+    </style>
 
 <p>
 Request a bed.
 </p>
 
+<div id="map"></div>
+    <script>
+		function initMap() {
+			if (navigator.geolocation) {
+		        navigator.geolocation.getCurrentPosition(showPosition, showError);
+		    } else {
+		        console.log("Geolocation is not supported by this browser.");
+		        showPositionDefault();
+		    }
+			
+		}
+		
+		function showPositionDefault() {
+			var defaultPosition = {
+	        		coords: {
+	        			latitude: 38.6270,
+						longitude: -90.1994
+	        		}
+	        }
+	        showPosition(defaultPosition);
+		}
+		
+		function showPosition(position) {
+			var location = {lat: position.coords.latitude, lng: position.coords.longitude};
+		    var map = new google.maps.Map(document.getElementById('map'), {
+				zoom: 7,
+				center: location
+			});
+		    
+			var marker = new google.maps.Marker({
+				position: location,
+				map: map
+			});
+			
+			var shelterMarkers = [];
+			
+			<% for(Shelter shelter : shelters) { %>
+			shelterMarkers.push(
+				new google.maps.Marker({
+					position: {
+							lat: <%= shelter.getLat() %>,
+							lng: <%= shelter.getLon() %>
+						},
+					}
+					map: map
+				})
+			);
+			<% } %>
+		}
+		
+		function showError(error) {
+		    switch(error.code) {
+		        case error.PERMISSION_DENIED:
+		            console.log("User denied the request for Geolocation.");
+		            showPositionDefault();
+		            break;
+		        case error.POSITION_UNAVAILABLE:
+		            console.log("Location information is unavailable.");
+		            showPositionDefault();
+		            break;
+		        case error.TIMEOUT:
+		            console.log("The request to get user location timed out.");
+		            showPositionDefault();
+		            break;
+		        case error.UNKNOWN_ERROR:
+		            console.log("An unknown error occurred.");
+		            showPositionDefault();
+		            break;
+		    }
+		}
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBsFbFzxam9hIy23IpUXvLgf4idAU10Wk&callback=initMap">
+    </script>
+
+<p>test</p>
 <p>
 	<form action="<%= contextPath %>/ShelterServlet?command=updateShelter" method="POST">
      	
@@ -74,8 +158,7 @@ Request a bed.
 		<input type="submit" value="Get bed">
 	</form>
 </p>
-
-
-
         
- <jsp:include page="/includes/footer.jsp" />
+<jsp:include page="/includes/footer.jsp" />
+ 
+ 
