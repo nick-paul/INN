@@ -37,4 +37,18 @@
    <servlet-name>ShelterServlet</servlet-name>
    <url-pattern>/ShelterServlet</url-pattern>
  </servlet-mapping>
+  <servlet>
+   <description></description>
+   <display-name>ClientServlet</display-name>
+   <servlet-name>ClientServlet</servlet-name>
+   <servlet-class>servlets.ClientServlet</servlet-class>
+   <init-param>
+     <param-name>development</param-name>
+     <param-value>true</param-value>
+   </init-param>
+ </servlet>
+ <servlet-mapping>
+   <servlet-name>ClientServlet</servlet-name>
+   <url-pattern>/ClientServlet</url-pattern>
+ </servlet-mapping>
 </web-app>

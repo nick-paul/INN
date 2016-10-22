@@ -88,6 +88,7 @@ public class DBShelter {
 		return shelters;
 	}
 
+
 	
 	public static void clearClient(int clientID) {
 		try {
@@ -104,6 +105,7 @@ public class DBShelter {
 		}
 	}
 	
+
 	private static Shelter getShelterBean(ResultSet rs) {
 		Shelter shelter = new Shelter();
 		
@@ -128,6 +130,4 @@ public class DBShelter {
 
 		return shelter;
 	}
-
-
 }

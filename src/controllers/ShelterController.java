@@ -13,11 +13,7 @@ public class ShelterController
 {
 	public static int stringToInt(String INPUT)
 	{
-		try {
-			return(Integer.parseInt(INPUT));
-		} catch (NumberFormatException e) {
-			return -1;
-		}
+		return(Integer.parseInt(INPUT));
 	}
 	public static double stringToDouble(String INPUT)
 	{
@@ -104,6 +100,7 @@ public class ShelterController
 	}
 	
 	public static Shelter getShelter(int shelterID) {
+
 		//Yes I know this is horrible, but we are running low on time
 		ArrayList<Shelter> shelters = DBShelter.getAllShelters();
 		for (Shelter s : shelters) {
@@ -113,5 +110,4 @@ public class ShelterController
 		}
 		return null;
 	}
-	
 }
