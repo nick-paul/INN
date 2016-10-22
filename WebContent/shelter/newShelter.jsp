@@ -80,8 +80,6 @@ Create a shelter.
 		<input type="submit" value="Submit">
 	</form>
 </p>
-
-
-
         
- <jsp:include page="/includes/footer.jsp" />
+<jsp:include page="/includes/footer.jsp" />
+
