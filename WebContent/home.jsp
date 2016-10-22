@@ -1,6 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+
+<%@ page import ="beans.Shelter" %>
+<%@ page import ="java.util.ArrayList" %>
 <% String contextPath = request.getContextPath(); %>
+<% ArrayList<Shelter> shelters = new ArrayList<Shelter>(); %>
 
 <jsp:include page="/includes/header.jsp" />
 <style>
@@ -17,7 +19,6 @@ Request a bed.
 <div id="map"></div>
     <script>
 		function initMap() {
-			
 			if (navigator.geolocation) {
 		        navigator.geolocation.getCurrentPosition(showPosition, showError);
 		    } else {
@@ -27,30 +28,42 @@ Request a bed.
 			
 		}
 		
-		function getLocation() {
-		    
-		}
-		
 		function showPositionDefault() {
-			var position = {
+			var defaultPosition = {
 	        		coords: {
 	        			latitude: 38.6270,
 						longitude: -90.1994
 	        		}
 	        }
-	        showPosition(position);
+	        showPosition(defaultPosition);
 		}
 		
 		function showPosition(position) {
-			console.log(position);
+			var location = {lat: position.coords.latitude, lng: position.coords.longitude};
 		    var map = new google.maps.Map(document.getElementById('map'), {
 				zoom: 7,
-				center: {lat: position.coords.latitude, lng: position.coords.longitude}
+				center: location
 			});
+		    
 			var marker = new google.maps.Marker({
-				position: {lat: position.coords.latitude, lng: position.coords.longitude},
+				position: location,
 				map: map
 			});
+			
+			var shelterMarkers = [];
+			
+			<% for(Shelter shelter : shelters) { %>
+			shelterMarkers.push(
+				new google.maps.Marker({
+					position: {
+							lat: <%= shelter.getLat() %>,
+							lng: <%= shelter.getLon() %>
+						},
+					}
+					map: map
+				})
+			);
+			<% } %>
 		}
 		
 		function showError(error) {
