@@ -3,6 +3,7 @@ package db;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import beans.Shelter;
 
@@ -59,5 +60,9 @@ public class DBShelter {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public static ArrayList<Shelter> getAllShelters() {
+		Pre
 	}
 }
