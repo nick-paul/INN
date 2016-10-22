@@ -11,16 +11,16 @@
   </welcome-file-list>
   <servlet>
     <description></description>
-    <display-name>BasicServlet</display-name>
-    <servlet-name>BasicServlet</servlet-name>
-    <servlet-class>servlets.BasicServlet</servlet-class>
+    <display-name>ShelterServlet</display-name>
+    <servlet-name>ShelterServlet</servlet-name>
+    <servlet-class>servlets.ShelterServlet</servlet-class>
     <init-param>
       <param-name>development</param-name>
       <param-value>true</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>
-    <servlet-name>BasicServlet</servlet-name>
-    <url-pattern>/basicServlet</url-pattern>
+    <servlet-name>ShelterServlet</servlet-name>
+    <url-pattern>ShelterServlet</url-pattern>
   </servlet-mapping>
 </web-app>
