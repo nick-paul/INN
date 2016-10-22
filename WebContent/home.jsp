@@ -2,7 +2,8 @@
 <%@ page import ="java.util.ArrayList" %>
 
 <% String contextPath = request.getContextPath(); %>
-<% ArrayList<Shelter> shelters = new ArrayList<Shelter>(); %>
+<% ArrayList<Shelter> shelters = (ArrayList<Shelter>)request.getAttribute("shelterList"); %>
+<% System.out.println("data: " + shelters); %>
 
 <jsp:include page="/includes/header.jsp" />
 <style>
@@ -121,7 +122,7 @@ Request a bed.
 			
 			var shelterMarkers = [];
 			
-			<% for(Shelter shelter : shelters) { %>
+			<% if (shelters != null) for(Shelter shelter : shelters) { %>
 			shelterMarkers.push(
 				new google.maps.Marker({
 					position: {
@@ -218,7 +219,7 @@ Request a bed.
 		<input type="hidden" name="latitude"> <input type="hidden" name="longitude">
 	
 		<select id="shelterList" name="shelter" size="5">
-			<% for(Shelter shelter : shelters) { %>
+			<% if (shelters != null) for(Shelter shelter : shelters) { %>
 			<option value="<%= shelter.getID() %>" data-name="<%= shelter.getName() %>" data-lat="<%= shelter.getLat() %>" data-lng="<%= shelter.getLon() %>"><%= shelter.getName() %></option>
 			<% } %>
 		</select>
