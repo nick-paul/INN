@@ -14,6 +14,10 @@
     <display-name>BasicServlet</display-name>
     <servlet-name>BasicServlet</servlet-name>
     <servlet-class>servlets.BasicServlet</servlet-class>
+    <init-param>
+        <param-name>development</param-name>
+        <param-value>true</param-value>
+    </init-param>
   </servlet>
   <servlet-mapping>
     <servlet-name>BasicServlet</servlet-name>
