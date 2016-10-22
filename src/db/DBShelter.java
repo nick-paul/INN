@@ -19,7 +19,7 @@ public class DBShelter {
 			ps.setInt(4, shelter.getTotalBeds()); //Avail beds
 			ps.setDouble(5, shelter.getLat());
 			ps.setDouble(6, shelter.getLon());
-			ps.setString(shelter.getCity());
+			ps.setString(7, shelter.getCity());
 			ps.setString(8,shelter.getState());
 			ps.setInt(9, shelter.getZip());
 			ps.setString(10, shelter.getAddress());
