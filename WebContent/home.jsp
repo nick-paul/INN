@@ -9,11 +9,11 @@ Request a bed.
 </p>
 
 <p>
-	<form action="<%= contextPath %>/home?command=requestBed" method="POST">
+	<form action="<%= contextPath %>/updateShelter?command=updateShelter" method="POST">
      	
      	<input type="hidden" name="shelter">
 
-		<input type="text" name="lat" placeholder="Latitude"> <input type="text" name="long" placeholder="Longitude"><br>
+<!-- 		<input type="text" name="lat" placeholder="Latitude"> <input type="text" name="long" placeholder="Longitude"><br>
 		<br>
 
     	<input type="text" name="address" placeholder="Address"><br>
@@ -70,9 +70,9 @@ Request a bed.
 			<option value="WI">Wisconsin</option>
 			<option value="WY">Wyoming</option>
 		</select> <input type="text" name="zip" placeholder="Zip"><br>
-		<br>
+		<br> -->
 	
-		<input type="submit" value="Submit">
+		<input type="submit" value="Get bed">
 	</form>
 </p>
 
