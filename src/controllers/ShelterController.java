@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
+import beans.Client;
 import beans.Shelter;
+import db.DBClient;
 import db.DBShelter;
 
 public class ShelterController
@@ -77,7 +79,8 @@ public class ShelterController
 				request.setAttribute("shelter", s);
 			}
 		}
-
+		ArrayList<Client> clients=DBClient.getPendingClientsForShelter(shelterID);
+		request.setAttribute("clientList",clients);
 		request.setAttribute("shelterList", shelters);
 		
 		return "shelter/dashboard.jsp";

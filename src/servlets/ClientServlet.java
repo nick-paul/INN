@@ -54,8 +54,8 @@ public class ClientServlet extends HttpServlet
     	//case "updateShelter":
     		//forwardToPage = ShelterController.updateShelter(request);
     		//break;
-    	case "getPendingClientsForShelter":
-    		forwardToPage=ClientController.getPendingClients(request);
+//    	case "getPendingClientsForShelter":
+//    		forwardToPage=ClientController.getPendingClients(request);
     	default:
     		//Default, return back to the home page
     		forwardToPage = "home.jsp";

@@ -1,3 +1,6 @@
+<%@page import="table.Table"%>
+<%@page import="beans.Client"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="beans.Shelter"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -11,9 +14,21 @@
 
 <% Shelter shelter = (Shelter)request.getAttribute("shelter"); %>
 
-<%= shelter.getName() %>
+<h2><%= shelter.getName() %></h2>
+<% ArrayList<Client> clientList=(ArrayList<Client>)request.getAttribute("clientList");%>
 
 
+<%
+	Table clientTable = new Table("Col1", "col2", "col3");
+	
+	for (int i = 0; i < 5; i++) {
+		clientTable.addRow("A" + i, "B" + i, "C" + i);
+	}
+	
+
+%>
+
+<%= clientTable.toHTML() %>
 
 </body>
 </html>

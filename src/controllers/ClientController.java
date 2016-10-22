@@ -46,11 +46,5 @@ public class ClientController {
 		DBClient.newClient(client);
 		return("client/newClient.jsp");		
 	}
-	public static String getPendingClients(HttpServletRequest request)
-	{
-		ArrayList<Client> clients=DBClient.getPendingClientsForShelter(stringToInt(request.getParameter("id")));
-		request.setAttribute("clientList",clients);
-		return("home.jsp");
-	}
 	
 }
