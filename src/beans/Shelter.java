@@ -5,6 +5,9 @@ public class Shelter
 	private int ID;
 	private String comments;
 	private String name;
+	private String cocNumber;
+	
+	private String Inclusion;
 	private int totalBeds;
 	private int availableBeds;
 	private double lat;
@@ -13,9 +16,12 @@ public class Shelter
 	private String state;
 	private int zip;
 	private String address;	
+	
 	public Shelter()
 	{
 		this.ID=0;
+		this.cocNumber="MO-500";
+		this.Inclusion="Everyone";
 		this.comments="no comments";
 		this.name="default name";
 		this.totalBeds=0;
@@ -27,31 +33,50 @@ public class Shelter
 		this.zip=0;
 		this.address="";
 	}
+	
 	public int getID() {
 		return ID;
 	}
 	public void setID(int iD) {
 		ID = iD;
 	}
+	
 	public String getComments() {
 		return comments;
 	}
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
+	
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
-	// Think of ways of changing available beds from adding more total beds or removing total beds
+	
+	public String getCocNumber() {
+		return cocNumber;
+	}
+
+	public void setCocNumber(String cocNumber) {
+		this.cocNumber = cocNumber;
+	}
+
+	public String getInclusion() {
+		return Inclusion;
+	}
+
+	public void setInclusion(String inclusion) {
+		Inclusion = inclusion;
+	}
 	public int getTotalBeds() {
 		return totalBeds;
 	}
 	public void setTotalBeds(int totalBeds) {
 		this.totalBeds = totalBeds;
 	}
+	
 	public void addTotalBeds(int newBeds)
 	{
 		this.totalBeds+=newBeds;
@@ -72,18 +97,21 @@ public class Shelter
 			this.totalBeds-=removedBeds;
 		}
 	}
+	
 	public int getAvailableBeds() {
 		return availableBeds;
 	}
 	public void setAvailableBeds(int availableBeds) {
 		this.availableBeds = availableBeds;
 	}
+	
 	public double getLat() {
 		return lat;
 	}
 	public void setLat(double lat) {
 		this.lat = lat;
 	}
+	
 	public double getLon() {
 		return lon;
 	}
