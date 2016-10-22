@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 
 import beans.Shelter;
@@ -49,5 +51,10 @@ public class ShelterController
 		DBShelter.updateCount(Id,availableBeds);
 		return "shelter/updateShelter.jsp";
 	}
-	
+	public static String getAllShelters(HttpServletRequest request)
+	{
+		ArrayList<Shelter> allShelters=DBShelter.getAllShelters();
+		request.setAttribute("shelterList",allShelters);
+		return("home.jsp");
+	}
 }
