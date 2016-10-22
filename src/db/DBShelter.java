@@ -1,5 +1,6 @@
 package db;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -10,7 +11,8 @@ public class DBShelter {
 	
 	public static void newShelter(Shelter shelter) {
 		try {
-			PreparedStatement ps = DBConnector.getConnection().prepareStatement(
+			Connection conn = DBConnector.getConnection();
+			PreparedStatement ps = conn.prepareStatement(
 					"INSERT INTO shelter VALUES(0,?,?,?,?,?,?,?,?,?,?)");
 			
 			ps.setString(1, shelter.getName());
@@ -44,6 +46,15 @@ public class DBShelter {
 			
 			ps.executeQuery();
 		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void main(String[] args) {
+		try {
+			System.out.println(DBConnector.getConnection().prepareStatement(""));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
