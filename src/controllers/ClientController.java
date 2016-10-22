@@ -44,7 +44,7 @@ public class ClientController {
 		client.setBeds(beds);
 		client.setAge(age);	
 		DBClient.newClient(client);
-		return("client\newClient");		
+		return("client/newClient.jsp");		
 	}
 	public static String getPendingClients(HttpServletRequest request)
 	{
