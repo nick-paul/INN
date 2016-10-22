@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 
 import beans.Shelter;
@@ -21,11 +23,13 @@ public class ShelterController
 		String name=request.getParameter("name");
 		int totalBeds=stringToInt(request.getParameter("totalBeds"));
 		double lat=stringToDouble(request.getParameter("lat"));
-		double lon=stringToDouble(request.getParameter("lon"));
+		double lon=stringToDouble(request.getParameter("long"));
 		String city=request.getParameter("city");
 		String state=request.getParameter("state");
 		int zip=stringToInt(request.getParameter("zip"));
 		String address=request.getParameter("address");
+		String phoneNumber=request.getParameter("phoneNumber");
+		String email=request.getParameter("email");
 		//Sets private variables of shelter
 		Shelter shelter=new Shelter();
 		shelter.setID(ID);
@@ -38,8 +42,10 @@ public class ShelterController
 		shelter.setState(state);
 		shelter.setZip(zip);
 		shelter.setAddress(address);
+		shelter.setPhoneNumber(phoneNumber);
+		shelter.setEmail(email);
 		DBShelter.newShelter(shelter);
-		return "newShelter.jsp";
+		return "shelter/newShelter.jsp";
 	}
 
 	public static String updateShelter(HttpServletRequest request) 
@@ -47,7 +53,12 @@ public class ShelterController
 		int Id=stringToInt(request.getParameter("Id"));
 		int availableBeds=stringToInt(request.getParameter("availableBeds"));
 		DBShelter.updateCount(Id,availableBeds);
-		return "updateShelter.jsp";
+		return "shelter/updateShelter.jsp";
 	}
-	
+	public static String getAllShelters(HttpServletRequest request)
+	{
+		ArrayList<Shelter> allShelters=DBShelter.getAllShelters();
+		request.setAttribute("shelterList",allShelters);
+		return("home.jsp");
+	}
 }

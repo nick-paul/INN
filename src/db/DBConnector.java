@@ -16,7 +16,7 @@ public class DBConnector {
 	public final static String DB_Driver = "org.gjt.mm.mysql.Driver";
 	
 	/** Database name */
-	public final static String DB_NAME = "robofestnet";
+	public final static String DB_NAME = "homeless";
     
 	/** Database URL */
 	public final static String DB_URL = "jdbc:mysql://localhost:3306/" + DB_NAME;

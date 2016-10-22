@@ -74,7 +74,9 @@ Create a shelter.
 			<option value="WV">West Virginia</option>
 			<option value="WI">Wisconsin</option>
 			<option value="WY">Wyoming</option>
-		</select> <input type="text" name="zip" placeholder="Zip"><br>
+		</select> <input type="text" name="zip" placeholder="Zip"><br><br>
+		<input type="text" name="phoneNumber" placeholder="(###) ###-####"><br><br>
+		<input type="text" name="email" placeholder="email@example.com"><br>
 		<br>
 	
 		<input type="submit" value="Submit">

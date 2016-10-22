@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import controllers.ShelterController;
 
-public class ShelterServlet 
+public class ShelterServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
        
@@ -55,6 +55,8 @@ public class ShelterServlet
     	case "updateShelter":
     		forwardToPage = ShelterController.updateShelter(request);
     		break;
+    	case "getAllShelters":
+    		forwardToPage=ShelterController.getAllShelters(request);
     	default:
     		//Default, return back to the home page
     		forwardToPage = "home.jsp";
