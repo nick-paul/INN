@@ -2,6 +2,7 @@ package db;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -63,6 +64,47 @@ public class DBShelter {
 	}
 	
 	public static ArrayList<Shelter> getAllShelters() {
-		return null;
+		ArrayList<Shelter> shelters = new ArrayList<Shelter>();
+
+		try {
+			PreparedStatement ps = DBConnector.getConnection().prepareStatement(
+					"SELECT * FROM shelter;");
+			
+			ResultSet rs = ps.executeQuery();
+			
+			
+			while(!rs.next()) {
+				shelters.add(getShelterBean(rs));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return shelters;
+	}
+
+	private static Shelter getShelterBean(ResultSet rs) {
+		Shelter shelter = new Shelter();
+		
+		try {
+			shelter.setID(rs.getInt("id"));
+			shelter.setName(rs.getString("name"));
+			shelter.setComments(rs.getString("comments"));
+			shelter.setTotalBeds(rs.getInt("totalBeds"));
+			shelter.setAvailableBeds(rs.getInt("avilBeds"));
+			shelter.setLat(rs.getDouble("lat"));
+			shelter.setLon(rs.getDouble("lon"));
+			shelter.setCity(rs.getString("city"));
+			shelter.setState(rs.getString("state"));
+			shelter.setZip(rs.getInt("zip"));
+			shelter.setAddress(rs.getString("address"));
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return shelter;
 	}
 }
