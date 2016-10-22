@@ -9,12 +9,14 @@
 	<tr align="center" >
 		<td>
 			<form action="<%=request.getContextPath() %>/ShelterServlet?command=viewDashboard" name="loginForm" method="POST">
+			<p>Select your shelter</p>
 			<select name="shelterID">
 			<% for (Shelter s : shelters)  {%>
 				<option value="<%=s.getID()%>"><%=s.getName() %>
 			<% } %>
 			</select>
-			<input type="hidden" name="form_submitted" value="true">
+			<p>Enter password</p>
+			<input type="password" name="password" /> 
 			<hr />
 			<button type="submit" class="btn btn-primary">Login</button>
 			</form>

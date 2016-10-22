@@ -13,11 +13,7 @@ public class ShelterController
 {
 	public static int stringToInt(String INPUT)
 	{
-		try {
-			return(Integer.parseInt(INPUT));
-		} catch (NumberFormatException e) {
-			return -1;
-		}
+		return(Integer.parseInt(INPUT));
 	}
 	public static double stringToDouble(String INPUT)
 	{
@@ -76,38 +72,17 @@ public class ShelterController
 		String shelterID_str = request.getParameter("shelterID");
 		int shelterID = stringToInt(shelterID_str);
 		
-		request.setAttribute("shelter", getShelter(shelterID));
-		
-		ArrayList<Client> clients=DBClient.getPendingClientsForShelter(shelterID);
-		request.setAttribute("clientList",clients);
-		request.setAttribute("shelterList", DBShelter.getAllShelters());
-		
-		return "shelter/dashboard.jsp";
-	}
-	public static String getClearClient(HttpServletRequest request) {
-		String shelterID_str = request.getParameter("shelterID");
-		String clientID_str = request.getParameter("clientID");
-		
-		int shelterID = stringToInt(shelterID_str);
-		int clientID = stringToInt(clientID_str);
-		
-		DBShelter.clearClient(clientID);
-		
-		request.setAttribute("shelter", getShelter(shelterID));
-		request.setAttribute("shelterList", DBShelter.getAllShelters());
-		
-		return "shelter/dashboard";
-	}
-	
-	public static Shelter getShelter(int shelterID) {
 		//Yes I know this is horrible, but we are running low on time
 		ArrayList<Shelter> shelters = DBShelter.getAllShelters();
 		for (Shelter s : shelters) {
 			if (s.getID() == shelterID) {
-				return s;
+				request.setAttribute("shelter", s);
 			}
 		}
-		return null;
+		ArrayList<Client> clients=DBClient.getPendingClientsForShelter(shelterID);
+		request.setAttribute("clientList",clients);
+		request.setAttribute("shelterList", shelters);
+		
+		return "shelter/dashboard.jsp";
 	}
-	
 }

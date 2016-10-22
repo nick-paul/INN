@@ -88,22 +88,6 @@ public class DBShelter {
 		return shelters;
 	}
 
-	
-	public static void clearClient(int clientID) {
-		try {
-			PreparedStatement ps = DBConnector.getConnection().prepareStatement(
-					"UPDATE shelter SET pending=0 WHERE id=?");
-		
-			ps.setInt(1, clientID);
-			
-			ps.executeQuery();
-		
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
 	private static Shelter getShelterBean(ResultSet rs) {
 		Shelter shelter = new Shelter();
 		
@@ -128,6 +112,4 @@ public class DBShelter {
 
 		return shelter;
 	}
-
-
 }
