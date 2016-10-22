@@ -19,10 +19,11 @@
 
 
 <%
-	Table clientTable = new Table("Col1", "col2", "col3");
+	Table clientTable = new Table("First", "Last", "Gender","Age","Beds","Phone number");
 	
-	for (int i = 0; i < 5; i++) {
-		clientTable.addRow("A" + i, "B" + i, "C" + i);
+	for (Client c:clientList) 
+	{		
+		clientTable.addRow(c.getFirstName(),c.getLastName(),c.getGender(),Integer.toString(c.getAge()),Integer.toString(c.getBeds()),c.getPhoneNumber());
 	}
 	
 
