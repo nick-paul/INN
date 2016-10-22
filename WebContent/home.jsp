@@ -9,7 +9,7 @@ Request a bed.
 </p>
 
 <p>
-	<form action="<%= contextPath %>/updateShelter?command=updateShelter" method="POST">
+	<form action="<%= contextPath %>/shelter/updateShelter?command=updateShelter" method="POST">
      	
      	<input type="hidden" name="shelter">
 
