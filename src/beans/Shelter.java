@@ -52,15 +52,26 @@ public class Shelter
 	public void setTotalBeds(int totalBeds) {
 		this.totalBeds = totalBeds;
 	}
-//	public void addTotalBeds(int newBeds)
-//	{
-//		this.totalBeds+=newBeds;
-//		this.availableBeds+=newBeds;
-//	}
-//	public void removeTotalBeds(int removedBeds)
-//	{
-//		int bedDifference=totalBeds-availableBeds;
-//	}
+	public void addTotalBeds(int newBeds)
+	{
+		this.totalBeds+=newBeds;
+		this.availableBeds+=newBeds;
+	}
+	public void removeTotalBeds(int removedBeds)
+	{
+		int bedDifference=totalBeds-availableBeds;
+		if (bedDifference<removedBeds)
+		{
+			removedBeds-=bedDifference;
+			this.totalBeds-=removedBeds;
+			this.availableBeds=totalBeds;
+			
+		}
+		else
+		{
+			this.totalBeds-=removedBeds;
+		}
+	}
 	public int getAvailableBeds() {
 		return availableBeds;
 	}
