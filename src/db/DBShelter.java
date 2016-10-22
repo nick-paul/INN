@@ -73,7 +73,7 @@ public class DBShelter {
 			ResultSet rs = ps.executeQuery();
 			
 			
-			while(!rs.next()) {
+			while(rs.next()) {
 				shelters.add(getShelterBean(rs));
 			}
 			
