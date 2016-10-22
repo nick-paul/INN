@@ -16,7 +16,7 @@ public class DBClient {
 		try {
 			Connection conn = DBConnector.getConnection();
 			PreparedStatement ps = conn.prepareStatement(
-					"INSERT INTO shelter VALUES(0,?,?,?,?,?,?,?,?,?,?,?)");
+					"INSERT INTO client VALUES(0,?,?,?,?,?,?,?,?,?,?,?)");
 			
 			ps.setInt(1, client.getRequestedShelterID());;
 			ps.setString(2, client.getFirstName());
