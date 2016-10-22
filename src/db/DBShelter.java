@@ -92,11 +92,11 @@ public class DBShelter {
 	public static void clearClient(int clientID) {
 		try {
 			PreparedStatement ps = DBConnector.getConnection().prepareStatement(
-					"UPDATE shelter SET pending=0 WHERE id=?");
+					"UPDATE client SET pending=0 WHERE id=?");
 		
 			ps.setInt(1, clientID);
 			
-			ps.executeQuery();
+			ps.execute();
 		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

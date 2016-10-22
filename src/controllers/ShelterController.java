@@ -85,6 +85,8 @@ public class ShelterController
 		return "shelter/dashboard.jsp";
 	}
 	public static String getClearClient(HttpServletRequest request) {
+		System.out.println("getClearClient");
+		
 		String shelterID_str = request.getParameter("shelterID");
 		String clientID_str = request.getParameter("clientID");
 		
@@ -93,10 +95,12 @@ public class ShelterController
 		
 		DBShelter.clearClient(clientID);
 		
+		ArrayList<Client> clients=DBClient.getPendingClientsForShelter(shelterID);
+		request.setAttribute("clientList",clients);
 		request.setAttribute("shelter", getShelter(shelterID));
 		request.setAttribute("shelterList", DBShelter.getAllShelters());
 		
-		return "shelter/dashboard";
+		return "shelter/dashboard.jsp";
 	}
 	
 	public static Shelter getShelter(int shelterID) {

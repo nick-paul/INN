@@ -43,7 +43,7 @@ public class DBClient {
 
 		try {
 			PreparedStatement ps = DBConnector.getConnection().prepareStatement(
-					"SELECT * FROM client WHERE requestedShelterID=?;");
+					"SELECT * FROM client WHERE requestedShelterID=? AND pending=1;");
 			
 			ps.setInt(1, shelterID);
 			

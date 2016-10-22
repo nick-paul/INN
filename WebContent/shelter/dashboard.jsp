@@ -16,14 +16,16 @@
 
 <h2><%= shelter.getName() %></h2>
 <% ArrayList<Client> clientList=(ArrayList<Client>)request.getAttribute("clientList");%>
-
+<% String contextPath = request.getContextPath(); %>
 
 <%
-	Table clientTable = new Table("First", "Last", "Gender","Age","Beds","Phone number");
+	Table clientTable = new Table("First", "Last", "Gender","Age","Beds","Phone number", "Clear");
 	
-	for (Client c:clientList) 
+	if (clientList != null) for (Client c:clientList) 
 	{		
-		clientTable.addRow(c.getFirstName(),c.getLastName(),c.getGender(),Integer.toString(c.getAge()),Integer.toString(c.getBeds()),c.getPhoneNumber());
+		clientTable.addRow(c.getFirstName(),c.getLastName(),c.getGender(),Integer.toString(c.getAge()),Integer.toString(c.getBeds()),c.getPhoneNumber(),
+				"<a href='" + contextPath + "/ShelterServlet?command=clearClient&shelterID=" + shelter.getID() 
+				+ "&clientID=" + c.getId() + "'>Clear</a>");
 	}
 	
 
