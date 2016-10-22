@@ -57,6 +57,13 @@ public class ShelterServlet extends HttpServlet
     		break;
     	case "getAllShelters":
     		forwardToPage=ShelterController.getAllShelters(request);
+    		break;
+    	case "shelterLogin":
+    		forwardToPage = ShelterController.getShelterLogin(request);
+    		break;
+    	case "viewDashboard":
+    		forwardToPage = ShelterController.getViewDashBoard(request);
+    		break;
     	default:
     		//Default, return back to the home page
     		forwardToPage = "home.jsp";

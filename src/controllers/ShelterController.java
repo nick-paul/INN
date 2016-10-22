@@ -61,4 +61,25 @@ public class ShelterController
 		request.setAttribute("shelterList",allShelters);
 		return("home.jsp");
 	}
+	public static String getShelterLogin(HttpServletRequest request) {
+		ArrayList<Shelter> shelters = DBShelter.getAllShelters();
+		request.setAttribute("shelterList", shelters);
+		return "shelter/login.jsp";
+	}
+	public static String getViewDashBoard(HttpServletRequest request) {
+		String shelterID_str = request.getParameter("shelterID");
+		int shelterID = stringToInt(shelterID_str);
+		
+		//Yes I know this is horrible, but we are running low on time
+		ArrayList<Shelter> shelters = DBShelter.getAllShelters();
+		for (Shelter s : shelters) {
+			if (s.getID() == shelterID) {
+				request.setAttribute("shelter", s);
+			}
+		}
+
+		request.setAttribute("shelterList", shelters);
+		
+		return "shelter/dashboard.jsp";
+	}
 }

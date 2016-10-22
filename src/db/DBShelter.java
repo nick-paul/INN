@@ -96,7 +96,7 @@ public class DBShelter {
 			shelter.setName(rs.getString("name"));
 			shelter.setComments(rs.getString("comments"));
 			shelter.setTotalBeds(rs.getInt("totalBeds"));
-			shelter.setAvailableBeds(rs.getInt("avilBeds"));
+			shelter.setAvailableBeds(rs.getInt("availBeds"));
 			shelter.setLat(rs.getDouble("lat"));
 			shelter.setLon(rs.getDouble("lon"));
 			shelter.setCity(rs.getString("city"));
