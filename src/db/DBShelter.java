@@ -15,7 +15,7 @@ public class DBShelter {
 		try {
 			Connection conn = DBConnector.getConnection();
 			PreparedStatement ps = conn.prepareStatement(
-					"INSERT INTO shelter VALUES(0,?,?,?,?,?,?,?,?,?,?)");
+					"INSERT INTO shelter VALUES(0,?,?,?,?,?,?,?,?,?,?,?,?)");
 			
 			ps.setString(1, shelter.getName());
 			ps.setString(2, shelter.getComments());
@@ -27,6 +27,9 @@ public class DBShelter {
 			ps.setString(8,shelter.getState());
 			ps.setInt(9, shelter.getZip());
 			ps.setString(10, shelter.getAddress());
+			ps.setString(11, shelter.getPhoneNumber());
+			ps.setString(12, shelter.getEmail());
+			
 			
 			ps.execute();
 			
@@ -100,6 +103,8 @@ public class DBShelter {
 			shelter.setState(rs.getString("state"));
 			shelter.setZip(rs.getInt("zip"));
 			shelter.setAddress(rs.getString("address"));
+			shelter.setPhoneNumber(rs.getString("phoneNumber"));
+			shelter.setEmail(rs.getString("email"));
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

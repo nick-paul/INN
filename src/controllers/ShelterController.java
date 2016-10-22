@@ -28,6 +28,8 @@ public class ShelterController
 		String state=request.getParameter("state");
 		int zip=stringToInt(request.getParameter("zip"));
 		String address=request.getParameter("address");
+		String phoneNumber=request.getParameter("phoneNumber");
+		String email=request.getParameter("email");
 		//Sets private variables of shelter
 		Shelter shelter=new Shelter();
 		shelter.setID(ID);
@@ -40,6 +42,8 @@ public class ShelterController
 		shelter.setState(state);
 		shelter.setZip(zip);
 		shelter.setAddress(address);
+		shelter.setPhoneNumber(phoneNumber);
+		shelter.setEmail(email);
 		DBShelter.newShelter(shelter);
 		return "shelter/newShelter.jsp";
 	}

@@ -5,6 +5,8 @@ public class Shelter
 	private int ID;
 	private String comments;
 	private String name;
+	private String phoneNumber;
+	private String email;
 	private int totalBeds;
 	private int availableBeds;
 	private double lat;
@@ -18,6 +20,8 @@ public class Shelter
 		this.ID=0;
 		this.comments="no comments";
 		this.name="default name";
+		this.phoneNumber="";
+		this.email="";
 		this.totalBeds=0;
 		this.availableBeds=0;
 		this.lat=0;
@@ -45,7 +49,18 @@ public class Shelter
 	public void setName(String name) {
 		this.name = name;
 	}
-	// Think of ways of changing available beds from adding more total beds or removing total beds
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public int getTotalBeds() {
 		return totalBeds;
 	}
