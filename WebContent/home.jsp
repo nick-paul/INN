@@ -194,7 +194,7 @@ Request a bed.
 							lng: $(this).data('lng')
 						}
 		    		);
-		    		$(this).text($(this).data('name') + ', ' + Math.round(distance) + ' miles away');
+		    		$(this).text($(this).data('name') + ', ' + Math.round(distance) + ' miles away, ' + $(this).data('beds') + ' beds available');
 		    	});
 		    }
 			
@@ -232,7 +232,7 @@ Request a bed.
 	
 		<select id="shelterID" name="shelter" size="5">
 			<% if (shelters != null) for(Shelter shelter : shelters) { %>
-			<option value="<%= shelter.getID() %>" data-name="<%= shelter.getName() %>" data-lat="<%= shelter.getLat() %>" data-lng="<%= shelter.getLon() %>"><%= shelter.getName() %></option>
+			<option value="<%= shelter.getID() %>" data-name="<%= shelter.getName() %>" data-beds="<%= shelter.getAvailableBeds() %>" data-lat="<%= shelter.getLat() %>" data-lng="<%= shelter.getLon() %>"><%= shelter.getName() %></option>
 			<% } %>
 		</select>
 		
