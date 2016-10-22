@@ -3,6 +3,24 @@
 
 <% String contextPath = request.getContextPath(); %>
 <% ArrayList<Shelter> shelters = (ArrayList<Shelter>)request.getAttribute("shelterList"); %>
+<%
+	Shelter shelterx = new Shelter();
+	// 0,'Gateway 180', 'Largest 24-Hour Emergency Housing In Missouri', 300, 300, 38.637569, -90.204685, 'St. Louis', 'Missuori', 63106, '1000 19th St', '123456', 'email@domain.com'
+	shelterx.setID(0);
+	shelterx.setName("Gateway 180x");
+	shelterx.setComments("World's hargest hackathon");
+	shelterx.setTotalBeds(15);
+	shelterx.setAvailableBeds(14);
+	shelterx.setLat(38.637569);
+	shelterx.setLon(-90.204685);
+	shelterx.setCity("St. Louis");
+	shelterx.setState("Missouri");
+	shelterx.setZip(21501);
+	shelterx.setAddress("123 Fake St");
+	shelterx.setPhoneNumber("1234567890");
+	shelterx.setEmail("a@a.a");
+	shelters.add(shelterx);
+%>
 <% System.out.println("data: " + shelters); %>
 
 <jsp:include page="/includes/header.jsp" />
@@ -68,6 +86,8 @@ Request a bed.
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	
     <script>
+    	var map;
+    	
 		function getDistanceMiles(latLng1, latLng2) {
 			var dLat = (latLng2.lat - latLng1.lat) * (Math.PI / 180);
 			var dLon = (latLng2.lng - latLng1.lng) * (Math.PI / 180);
@@ -82,43 +102,11 @@ Request a bed.
 		}
     	
 		function initMap() {
-			if (navigator.geolocation) {
-		        navigator.geolocation.getCurrentPosition(showPosition, showError);
-		    } else {
-		        console.log("Geolocation is not supported by this browser.");
-		        showPositionDefault();
-		    }
-		}
 		
-		function showPositionDefault() {
-	        showPosition(null);
-		}
-		
-		function showPosition(position) {
-			var location = position ? {lat: position.coords.latitude, lng: position.coords.longitude} : {lat: 38.6270, lng: -90.1994};
-			
-		    var map = new google.maps.Map($('#map')[0], {
-				zoom: 7,
-				center: location
+			map = new google.maps.Map($('#map')[0], {
+				center: {lat: 38.6270, lng: -90.1994},
+				zoom: 7
 			});
-		    
-		    if (position) {
-		    	var marker = new google.maps.Marker({
-					position: location,
-					map: map
-				});
-		    	
-		    	$('#shelterList > option').each(function() {
-		    		var distance = getDistanceMiles(
-		    			location,
-		    			{
-							lat: this.data('lat'),
-							lng: this.data('lng')
-						}
-		    		);
-		    		this.text(this.data('name') + ', ' + distance + ' miles away');
-		    	});
-		    }
 			
 			var shelterMarkers = [];
 			
@@ -126,10 +114,10 @@ Request a bed.
 			shelterMarkers.push(
 				new google.maps.Marker({
 					position: {
-							lat: <%= shelter.getLat() %>,
-							lng: <%= shelter.getLon() %>
-						},
-					}
+						lat: <%= shelter.getLat() %>,
+						lng: <%= shelter.getLon() %>
+					},
+					label: 'S',
 					map: map
 				})
 			);
@@ -143,7 +131,7 @@ Request a bed.
 	        	searchBox.setBounds(map.getBounds());
 	        });
 
-	        var markers = [];
+	        var marker;
 
 	        searchBox.addListener('places_changed', function() {
 	          var places = searchBox.getPlaces();
@@ -151,16 +139,15 @@ Request a bed.
 	          if (places.length == 0) {
 	            return;
 	          }
-
-	          markers.forEach(function(marker) {
-	            marker.setMap(null);
-	          });
-	          markers = [];
+	          
+	          if (marker) {
+	        	  marker.setMap(null);
+	          }
 
 	          var bounds = new google.maps.LatLngBounds();
-	          places.forEach(function(place) {
-	            if (!place.geometry) {
-	              console.log("Returned place contains no geometry");
+	          
+	          var place = places[0];
+	          if (!place.geometry) {
 	              return;
 	            }
 	            var icon = {
@@ -171,22 +158,47 @@ Request a bed.
 	              scaledSize: new google.maps.Size(25, 25)
 	            };
 
-	            markers.push(new google.maps.Marker({
-	              map: map,
-	              icon: icon,
-	              title: place.name,
-	              position: place.geometry.location
-	            }));
-
-	            if (place.geometry.viewport) {
-	              // Only geocodes have viewport.
-	              bounds.union(place.geometry.viewport);
-	            } else {
-	              bounds.extend(place.geometry.location);
-	            }
+	          showPosition({
+				coords: {
+	        	  latitude: place.geometry.location.lat(),
+	        	  longitude: place.geometry.location.lng()
+	          	}
 	          });
-	          map.fitBounds(bounds);
-	        });
+			});
+			
+			if (navigator.geolocation) {
+		        navigator.geolocation.getCurrentPosition(showPosition, showError);
+		    } else {
+		        console.log("Geolocation is not supported by this browser.");
+		        showPositionDefault();
+		    }
+		}
+		
+		function showPositionDefault() {
+	        showPosition(null);
+		}
+		
+		function showPosition(position, isShelter) {
+			var location = position ? {lat: parseFloat(position.coords.latitude), lng: parseFloat(position.coords.longitude)} : {lat: 38.6270, lng: -90.1994};
+		    if (position) {
+		    	var marker = new google.maps.Marker({
+					position: location,
+					map: map
+				});
+		    	
+		    	$('#shelterID > option').each(function() {
+		    		var distance = getDistanceMiles(
+		    			location,
+		    			{
+							lat: $(this).data('lat'),
+							lng: $(this).data('lng')
+						}
+		    		);
+		    		$(this).text($(this).data('name') + ', ' + Math.round(distance) + ' miles away, ' + $(this).data('beds') + ' beds available');
+		    	});
+		    }
+			
+			map.panTo(location);
 		}
 		
 		function showError(error) {
@@ -214,37 +226,15 @@ Request a bed.
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBsFbFzxam9hIy23IpUXvLgf4idAU10Wk&callback=initMap&libraries=places"></script>
 <p>
-	<form action="<%= contextPath %>/ShelterServlet?command=updateShelter" method="POST">
+	<form action="<%= contextPath %>/ClientServlet?command=getClientInfo" method="POST">
      	
-		<input type="hidden" name="latitude"> <input type="hidden" name="longitude">
+		<input type="hidden" name="lat"> <input type="hidden" name="lon">
 	
-		<select id="shelterList" name="shelter" size="5">
+		<select id="shelterID" name="shelter" size="5">
 			<% if (shelters != null) for(Shelter shelter : shelters) { %>
-			<option value="<%= shelter.getID() %>" data-name="<%= shelter.getName() %>" data-lat="<%= shelter.getLat() %>" data-lng="<%= shelter.getLon() %>"><%= shelter.getName() %></option>
+			<option value="<%= shelter.getID() %>" data-name="<%= shelter.getName() %>" data-beds="<%= shelter.getAvailableBeds() %>" data-lat="<%= shelter.getLat() %>" data-lng="<%= shelter.getLon() %>"><%= shelter.getName() %></option>
 			<% } %>
 		</select>
-		
-		<input type="text" name="firstName" placeholder="First name"> <input type="text" name="lastName" placeholder="Last name"><br>
-		<br>
-		
-		<input type="tel" name="phoneNumber" placeholder="Phone number"><br>
-		<br>
-		
-		<input type="number" name="age" placeholder="Age"><br>
-		<br>
-		
-		Number of beds: <select name="numberOfBeds">
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-			<option value="4">4</option>
-			<option value="5">5</option>
-			<option value="6">6</option>
-			<option value="7">7</option>
-			<option value="8">8</option>
-			<option value="9">9</option>
-		</select><br>
-		<br>
 		
 		<input type="submit" value="Get bed">
 	</form>
