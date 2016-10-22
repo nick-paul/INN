@@ -25,10 +25,10 @@ public class DBClient {
 			ps.setDouble(5, client.getLon());
 			ps.setString(6, client.getPhoneNumber());
 			ps.setInt(7, client.getEta());
-			ps.setInt(8,  client.getNumBeds());
+			ps.setInt(8,  client.getBeds());
 			ps.setInt(9, client.getAge());
 			ps.setString(10, client.getGender());
-			ps.setBoolean(11, client.setPending());
+			ps.setBoolean(11, client.isPending());
 			
 			ps.execute();
 			
@@ -74,7 +74,7 @@ public class DBClient {
 			client.setLat(rs.getLong("lat"));
 			client.setPhoneNumber(rs.getString("phoneNumber"));
 			client.setEta(rs.getInt("eta"));
-			client.setNumBeds(rs.getInt("numBeds"));
+			client.setBeds(rs.getInt("numBeds"));
 			client.setAge(rs.getInt("age"));
 			client.setGender(rs.getString("gender"));
 			client.setPending(rs.getBoolean("pending"));
