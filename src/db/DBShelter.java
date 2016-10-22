@@ -63,6 +63,6 @@ public class DBShelter {
 	}
 	
 	public static ArrayList<Shelter> getAllShelters() {
-		Pre
+		return null;
 	}
 }
