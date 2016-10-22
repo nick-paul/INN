@@ -15,7 +15,7 @@ public class ShelterController
 	{
 		return(Double.parseDouble(INPUT));
 	}
-	public static String NewShelter(HttpServletRequest request) {
+	public static String newShelter(HttpServletRequest request) {
 		int ID=0;
 		String comments=request.getParameter("comments");
 		String name=request.getParameter("name");
@@ -42,7 +42,7 @@ public class ShelterController
 		return "newShelter.jsp";
 	}
 
-	public static String UpdateShelter(HttpServletRequest request) 
+	public static String updateShelter(HttpServletRequest request) 
 	{
 		int Id=stringToInt(request.getParameter("Id"));
 		int availableBeds=stringToInt(request.getParameter("availableBeds"));
