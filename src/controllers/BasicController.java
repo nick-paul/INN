@@ -41,6 +41,8 @@ public class BasicController {
 		//We can also set attributes to be things other than strings
 		request.setAttribute("processTime", new Date());
 		
+		
+		
 		//These values will be accessed in the sayHello.jsp file
 		
 		//Always return the path to the jsp file we want to take the user to
