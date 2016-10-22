@@ -31,11 +31,11 @@ public class BasicController {
 		String name = request.getParameter("myName");
 		
 		//Make the name all uppercase
-		String lowerName = name.toLowerCase();
+		String upperName = name.toUpperCase();
 		
 		//We can sent information to the jsp file using the setAttribute() method
 		//We will call the name "helloName"
-		request.setAttribute("helloName", lowerName);
+		request.setAttribute("helloName", upperName);
 		
 		
 		//We can also set attributes to be things other than strings
