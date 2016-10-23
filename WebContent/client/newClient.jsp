@@ -12,8 +12,8 @@ Create a Client.
     	<input type="text" name="lastName" placeholder="last name"><br>
     	<br>
     	<input type="number" name="id" placeholder=<%=id%>><br>
-    	<input type="number" name="lat" placeholder=<%=lat%>><br>
-    	<input type="number" name="lon" placeholder=<%=lon %>><br>
+    	<input type="text" name="lat" placeholder=<%=lat%>><br>
+    	<input type="text" name="lon" placeholder=<%=lon %>><br>
     	<br>
     	<input type="text" name="phoneNumber" placeholder="phone (###) ###-####"><br>
 		<br>
