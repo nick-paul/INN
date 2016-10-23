@@ -49,7 +49,7 @@ public class DBShelter {
 			ps.setInt(1, bedCount);
 			ps.setInt(2, id);
 			
-			ps.executeQuery();
+			ps.execute();
 		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

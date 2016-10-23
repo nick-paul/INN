@@ -55,7 +55,14 @@ public class ShelterController
 		int Id=stringToInt(request.getParameter("Id"));
 		int availableBeds=stringToInt(request.getParameter("availableBeds"));
 		DBShelter.updateCount(Id,availableBeds);
-		return "shelter/updateShelter.jsp";
+		
+		request.setAttribute("shelter", getShelter(Id));
+		
+		ArrayList<Client> clients=DBClient.getPendingClientsForShelter(Id);
+		request.setAttribute("clientList", clients);
+		request.setAttribute("shelterList", DBShelter.getAllShelters());
+		
+		return "shelter/dashboard.jsp";
 	}
 	public static String getAllShelters(HttpServletRequest request)
 	{
