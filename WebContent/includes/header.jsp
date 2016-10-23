@@ -1,5 +1,5 @@
 <html>
 <head>
-	<title>GlobalHack</title>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
