@@ -97,7 +97,6 @@ public class ShelterController
 		return "shelter/dashboard.jsp";
 	}
 	public static String getClearClient(HttpServletRequest request) {
-		System.out.println("getClearClient");
 		
 		String shelterID_str = request.getParameter("shelterID");
 		String clientID_str = request.getParameter("clientID");
