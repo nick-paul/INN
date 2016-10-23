@@ -5,12 +5,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
+<jsp:include page="/includes/header.jsp" />
 <% ArrayList<Client> clientList=(ArrayList<Client>)request.getAttribute("clientList");
    String contextPath = request.getContextPath();
    Shelter shelter = (Shelter)request.getAttribute("shelter");
@@ -31,6 +26,12 @@
 
 
 	<style>
+	.body {
+		background: #f3f3f3;
+		max-width: 850px;
+		margin-left: auto;
+		margin-right: auto;
+	}
 		.meter { 
 			height: 20px;  /* Can be anything */
 			position: relative;
@@ -165,6 +166,33 @@
 
 <h2><%= shelter.getName() %></h2>
 
+
+<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+  <thead>
+    <tr>
+      <th class="mdl-data-table__cell--non-numeric">Name</th>
+      <th>Gender</th>
+      <th>Age</th>
+      <th>Beds</th>
+      <th>Phone</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+	<tbody>
+		<% Table clientTable = new Table();
+		if (clientList != null) for (Client c:clientList) { %>		
+		<tr>
+			<td><%= c.getFirstName() %> <%= c.getLastName() %></td>
+			<td><%= c.getGender() %></td>
+			<td><%= c.getAge() %></td>
+			<td><%= c.getBeds() %></td>
+			<td><%= c.getPhoneNumber() %></td>
+			<td><a class="mdl-button mdl-js-button mdl-js-ripple-effect" href="<%= contextPath %>/ShelterServlet?command=clearClient&shelterID=<%= shelter.getID() %>&clientID=<%= c.getId() %>"><i class="material-icons">cancel</i></a></td>
+		</tr>
+		<% } %>
+	</tbody>
+</table>
+
 <table width="100%">
 	<tr>
 		<td>
@@ -184,14 +212,6 @@
 		</td>
 		<td>
 			<%
-				Table clientTable = new Table("First", "Last", "Gender","Age","Beds","Phone number", "Clear");
-				
-				if (clientList != null) for (Client c:clientList) 
-				{		
-					clientTable.addRow(c.getFirstName(),c.getLastName(),c.getGender(),Integer.toString(c.getAge()),Integer.toString(c.getBeds()),c.getPhoneNumber(),
-							"<a href='" + contextPath + "/ShelterServlet?command=clearClient&shelterID=" + shelter.getID() 
-							+ "&clientID=" + c.getId() + "'>Clear</a>");
-				}
 				
 				//To style this table
 				//clientTable.setOptions("style='..' class='..'");
@@ -209,7 +229,4 @@
 	</tr>
 </table>
 		
-
-
-</body>
-</html>
+<jsp:include page="/includes/footer.jsp" />
