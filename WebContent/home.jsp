@@ -125,6 +125,7 @@ form {
 </div>
 <div id="bottombar">
 	<a href="<%= contextPath %>/ShelterServlet?command=shelterLogin" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="loginButton">SHELTER LOGIN</a>
+	<font size="6" color="gray"><b>IN</b></font><font size="6"><b>N</b></font>
 </div>
 <div id="map"></div>
 
