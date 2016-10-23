@@ -43,6 +43,7 @@ public class ClientController {
 		client.setEta(eta);
 		client.setBeds(beds);
 		client.setAge(age);	
+		client.setGender(gender);
 		DBClient.newClient(client);
 		return("client/newClient.jsp");		
 	}
