@@ -69,7 +69,7 @@
 		.meter { 
 			height: 20px;  /* Can be anything */
 			position: relative;
-			margin: 20px 0 20px 0; /* Just for demo spacing */
+			margin: 10px 0 20px 0; /* Just for demo spacing */
 			background: #555;
 			-moz-border-radius: 25px;
 			-webkit-border-radius: 25px;
@@ -228,11 +228,11 @@
 		<form action="<%=request.getContextPath() %>/ShelterServlet?command=updateShelter" name="updateShelter" method="POST">
 		<div class="mdl-card mdl-shadow--2dp" style="width: 100%; margin-top: 65px; min-height: 0;">
 		  <div class="mdl-card__supporting-text">
-		    You have <input type="number" name="availableBeds" value="<%= shelter.getAvailableBeds() %>" style="width: 60px;"/> / <%= shelter.getTotalBeds() %> beds remaining.
 			<input type="hidden" name="Id" value="<%= shelter.getID() %>" />
 				<div class="meter nostripes <%= color %> ">
 				<span style="width: <%= percent %>%;">&nbsp;&nbsp;<%= shelter.getTotalBeds()-shelter.getAvailableBeds() %> / <%=shelter.getTotalBeds() %></span>
 			</div>
+			You have <input type="number" name="availableBeds" value="<%= shelter.getAvailableBeds() %>" style="width: 60px;"/> / <%= shelter.getTotalBeds() %> beds remaining.
 		  </div>
 		  <div class="mdl-card__actions mdl-card--border">
 		     <button type="submit" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">UPDATE</button>
