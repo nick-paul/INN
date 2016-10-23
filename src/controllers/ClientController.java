@@ -1,24 +1,29 @@
 package controllers;
 
-import java.util.ArrayList;
-
 import javax.servlet.http.HttpServletRequest;
 
 import beans.Client;
-import beans.Shelter;
 import db.DBClient;
-import db.DBShelter;
 
 
 public class ClientController {
 
 	public static int stringToInt(String INPUT)
 	{
-		return(Integer.parseInt(INPUT));
+		try {
+			return(Integer.parseInt(INPUT));
+		} catch (NumberFormatException e) {
+			return 0;
+		}
 	}
 	public static double stringToDouble(String INPUT)
 	{
-		return(Double.parseDouble(INPUT));
+		try {
+			return(Double.parseDouble(INPUT));
+		} catch (NumberFormatException e) {
+			return -1;
+		}
+		
 	}
 	
 	public static String newClient(HttpServletRequest request)

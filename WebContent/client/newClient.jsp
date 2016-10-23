@@ -11,10 +11,6 @@ Create a Client.
 		<input type="text" name="firstName" placeholder="first name">
     	<input type="text" name="lastName" placeholder="last name"><br>
     	<br>
-    	<input type="number" name="id" placeholder=<%=id%>><br>
-    	<input type="text" name="lat" placeholder=<%=lat%>><br>
-    	<input type="text" name="lon" placeholder=<%=lon %>><br>
-    	<br>
     	<input type="text" name="phoneNumber" placeholder="phone (###) ###-####"><br>
 		<br>
    		<input type="number" name="eta" placeholder="estimated time of arrival at shelter"><br>
@@ -25,6 +21,12 @@ Create a Client.
 		<br>
     	<input type="text" name="gender" placeholder="gender"><br>
     	<br>	
+    	
+   
+    	<input type="hidden" name="id"  value=<%=id%>>
+    	<input type="hidden" name="lat" value=<%=lat%>>
+    	<input type="hidden" name="lon" value=<%=lon %>>
+		
 		<input type="submit" value="Submit">
 	</form>
 

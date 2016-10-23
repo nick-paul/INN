@@ -13,11 +13,20 @@ public class ShelterController
 {
 	public static int stringToInt(String INPUT)
 	{
-		return(Integer.parseInt(INPUT));
+		try {
+			return(Integer.parseInt(INPUT));
+		} catch (NumberFormatException e) {
+			return 0;
+		}
 	}
+	
 	public static double stringToDouble(String INPUT)
 	{
-		return(Double.parseDouble(INPUT));
+		try {
+			return(Double.parseDouble(INPUT));
+		} catch (NumberFormatException e) {
+			return 0;
+		}
 	}
 	public static String newShelter(HttpServletRequest request) {
 		int ID=0;
