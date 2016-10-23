@@ -103,6 +103,7 @@ form {
 			<tr>
 				<th class="mdl-data-table__cell--non-numeric">Shelter</th>
 				<th>Distance</th>
+				<th>Remaining</th>
 				<th>&nbsp;</th>
 			</tr>
 		</thead>
@@ -111,12 +112,13 @@ form {
 			<tr data-id="<%= shelter.getID() %>" data-lat="<%= shelter.getLat() %>" data-lng="<%= shelter.getLon() %>">
 			    <td class="mdl-data-table__cell--non-numeric"><%= shelter.getName() %></td>
 			    <td id="distance_<%= shelter.getID() %>"></td>
+			    <td><%= shelter.getAvailableBeds() %></td>
 			    <td>
 				    <form action="<%= contextPath %>/ClientServlet?command=getClientInfo" method="POST">
-					    <input type="hidden" name="selectID" value="<%= shelter.getID() %>">
+					    <input type="hidden" name="shelterID" value="<%= shelter.getID() %>">
 					    <input type="hidden" name="lat" class="latitude" value="">
 					    <input type="hidden" name="lon" class="longitude" value="">
-					    <a class="mdl-button mdl-js-button mdl-js-ripple-effect"><i class="material-icons">phone</i></a><input type="submit" value="REQUEST" class="formButton mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+					    <!-- <a class="mdl-button mdl-js-button mdl-js-ripple-effect"><i class="material-icons">phone</i></a> --><input type="submit" value="REQUEST" class="formButton mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
 				    </form>
 			    </td>
 		  	</tr>
