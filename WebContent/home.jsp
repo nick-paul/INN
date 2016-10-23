@@ -3,25 +3,6 @@
 
 <% String contextPath = request.getContextPath(); %>
 <% ArrayList<Shelter> shelters = (ArrayList<Shelter>)request.getAttribute("shelterList"); %>
-<%
-	Shelter shelterx = new Shelter();
-	// 0,'Gateway 180', 'Largest 24-Hour Emergency Housing In Missouri', 300, 300, 38.637569, -90.204685, 'St. Louis', 'Missuori', 63106, '1000 19th St', '123456', 'email@domain.com'
-	shelterx.setID(0);
-	shelterx.setName("Gateway 180x");
-	shelterx.setComments("World's hargest hackathon");
-	shelterx.setTotalBeds(15);
-	shelterx.setAvailableBeds(14);
-	shelterx.setLat(38.637569);
-	shelterx.setLon(-90.204685);
-	shelterx.setCity("St. Louis");
-	shelterx.setState("Missouri");
-	shelterx.setZip(21501);
-	shelterx.setAddress("123 Fake St");
-	shelterx.setPhoneNumber("1234567890");
-	shelterx.setEmail("a@a.a");
-	shelters.add(shelterx);
-%>
-<% System.out.println("data: " + shelters); %>
 
 <jsp:include page="/includes/header.jsp" />
 <style>
@@ -222,13 +203,18 @@ Request a bed.
 		    }
 		}
 		
-		
+		$(function(){
+			$('#shelterID').on('change', function() {
+				$('#latitude').val($(this).find(':selected').data('lat'));
+				$('#longitude').val($(this).find(':selected')s.data('lng'));
+			});
+		});
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBsFbFzxam9hIy23IpUXvLgf4idAU10Wk&callback=initMap&libraries=places"></script>
 <p>
 	<form action="<%= contextPath %>/ClientServlet?command=getClientInfo" method="POST">
      	
-		<input type="hidden" name="lat"> <input type="hidden" name="lon">
+		<input type="hidden" name="lat" id="latitude" value=""> <input type="hidden" name="lon" id="longitude" value="">
 	
 		<select id="shelterID" name="shelter" size="5">
 			<% if (shelters != null) for(Shelter shelter : shelters) { %>
