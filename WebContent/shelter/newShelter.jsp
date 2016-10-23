@@ -4,14 +4,61 @@
 
 <jsp:include page="/includes/header.jsp" />
 
-<h2>Create a New Shelter</h2>
-<p>Please enter all shelter information</p>
-<br />
+<style>
+	html {
+		margin: 0;
+		padding: 0;
+	}
+	body {
+		width: 100%;
+		height: 100%;
+		margin: 0;
+		padding: 0;
+		background: #f3f3f3;
+	}
+	#heading {
+		background-color: #1565C0;
+		width: 100%;
+		height: 200px;
+		margin: 0;
+		padding: 0;
+		color: white;
+		position: relative;
+		-webkit-box-shadow: inset 0px -47px 5px -46px rgba(92,92,92,0.63);
+		-moz-box-shadow: inset 0px -47px 5px -46px rgba(92,92,92,0.63);
+		box-shadow: inset 0px -47px 5px -46px rgba(92,92,92,0.63);
+	}
+	#nestedHeading {
+		position: absolute;
+		width: 100%;
+		bottom: 25px;
+		text-align: center;
+	}
+	#content {
+		width: 100%;
+		margin: 0;
+		padding: 0;
+	}
+	#nestedContent {
+		max-width: 850px;
+		margin-left: auto;
+		margin-right: auto;
+		padding-top: 65px;
+		padding-bottom: 65px;
+	}
+</style>
 
-<p>
+<div id="heading">
+	<div id="nestedHeading">
+		<h2>Register a New Shelter</h2>
+	</div>
+</div>
+<div id="content">
+	<div id="nestedContent">
 	<form action="<%= contextPath %>/ShelterServlet?command=newShelter" method="POST">
-     		
-     	<div class="mdl-textfield mdl-js-textfield">
+		<div class="mdl-card mdl-shadow--2dp" style="width: 100%; min-height: 0;">
+		<div class="mdl-card__supporting-text" style="padding: 32px;">
+		  <div class="mdl-textfield mdl-js-textfield">
   			<input class="mdl-textfield__input" type="text" name="name">
 		    <label class="mdl-textfield__label" >Shelter Name</label>
 		 </div>
@@ -29,16 +76,18 @@
 		    <label class="mdl-textfield__label" >Total # Of Beds</label>
 		 </div>
 		 <br />
+		 <br />
 
 		 <div class="mdl-textfield mdl-js-textfield">
   			<input class="mdl-textfield__input" type="text" name="lat">
 		    <label class="mdl-textfield__label" >Latitude</label>
 		 </div>
-		 
+		 &nbsp;&nbsp;&nbsp;
 		 <div class="mdl-textfield mdl-js-textfield">
   			<input class="mdl-textfield__input" type="text" name="long">
 		    <label class="mdl-textfield__label" >Longitude</label>
 		 </div>
+		 <br />
 		 <br />
 		 
 		 <div class="mdl-textfield mdl-js-textfield">
@@ -51,10 +100,7 @@
   			<input class="mdl-textfield__input" type="text" name="city">
 		    <label class="mdl-textfield__label" >City</label>
 		 </div>
-		<br />
-		
-    	
-    	<div class="">
+		&nbsp;&nbsp;&nbsp;
 	    	<select name="state">
 	    	      <option value="" disabled selected>Select a State</option>
 				<option value="AL">Alabama</option>
@@ -109,13 +155,13 @@
 				<option value="WI">Wisconsin</option>
 				<option value="WY">Wyoming</option>
 			</select>
-		</div>
-		<br />
-		
-		<div class="mdl-textfield mdl-js-textfield">
+		&nbsp;&nbsp;&nbsp;
+		<div class="mdl-textfield mdl-js-textfield" style="width:100px;">
   			<input class="mdl-textfield__input" type="number" name="zip">
-		    <label class="mdl-textfield__label" >Zip Code</label>
+		    <label class="mdl-textfield__label">Zip Code</label>
 		 </div>
+		 <br />
+		 
 		 <br />
 		 
 		 
@@ -129,12 +175,15 @@
   			<input class="mdl-textfield__input" type="text" name="email">
 		    <label class="mdl-textfield__label" >email@example.com</label>
 		 </div>
-		 
-<br>
-	
-		<input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit" value="Submit">
-	</form>
-</p>
+		<br />
+		  </div>
+		  <div class="mdl-card__actions mdl-card--border">
+		     <button type="submit" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">SUBMIT</button>
+		  </div>
+		</div>
+		</form>
+	</div>
+</div>
         
 <jsp:include page="/includes/footer.jsp" />
 

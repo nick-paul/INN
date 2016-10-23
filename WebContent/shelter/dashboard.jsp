@@ -26,16 +26,50 @@
 
 
 	<style>
-	.body {
+	html {
+		margin: 0;
+		padding: 0;
+	}
+	body {
+		width: 100%;
+		height: 100%;
+		margin: 0;
+		padding: 0;
 		background: #f3f3f3;
+	}
+	#heading {
+		background-color: #1565C0;
+		width: 100%;
+		height: 200px;
+		margin: 0;
+		padding: 0;
+		color: white;
+		position: relative;
+		-webkit-box-shadow: inset 0px -47px 5px -46px rgba(92,92,92,0.63);
+		-moz-box-shadow: inset 0px -47px 5px -46px rgba(92,92,92,0.63);
+		box-shadow: inset 0px -47px 5px -46px rgba(92,92,92,0.63);
+	}
+	#nestedHeading {
+		position: absolute;
+		width: 100%;
+		bottom: 25px;
+		text-align: center;
+	}
+	#content {
+		width: 100%;
+		margin: 0;
+		padding: 0;
+	}
+	#nestedContent {
 		max-width: 850px;
 		margin-left: auto;
 		margin-right: auto;
+		padding-top: 65px;
 	}
 		.meter { 
 			height: 20px;  /* Can be anything */
 			position: relative;
-			margin: 60px 0 20px 0; /* Just for demo spacing */
+			margin: 10px 0 20px 0; /* Just for demo spacing */
 			background: #555;
 			-moz-border-radius: 25px;
 			-webkit-border-radius: 25px;
@@ -159,74 +193,54 @@
 			background-image: none;
 		}
 	</style>
-
-
-
-
-
-<h2><%= shelter.getName() %></h2>
-
-
-<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-  <thead>
-    <tr>
-      <th class="mdl-data-table__cell--non-numeric">Name</th>
-      <th>Gender</th>
-      <th>Age</th>
-      <th>Beds</th>
-      <th>Phone</th>
-      <th>&nbsp;</th>
-    </tr>
-  </thead>
-	<tbody>
-		<% Table clientTable = new Table();
-		if (clientList != null) for (Client c:clientList) { %>		
-		<tr>
-			<td><%= c.getFirstName() %> <%= c.getLastName() %></td>
-			<td><%= c.getGender() %></td>
-			<td><%= c.getAge() %></td>
-			<td><%= c.getBeds() %></td>
-			<td><%= c.getPhoneNumber() %></td>
-			<td><a class="mdl-button mdl-js-button mdl-js-ripple-effect" href="<%= contextPath %>/ShelterServlet?command=clearClient&shelterID=<%= shelter.getID() %>&clientID=<%= c.getId() %>"><i class="material-icons">cancel</i></a></td>
-		</tr>
-		<% } %>
-	</tbody>
-</table>
-
-<table width="100%">
-	<tr>
-		<td>
-			
-			<h3>You have <%= shelter.getAvailableBeds() %> beds remaining out of <%= shelter.getTotalBeds() %></h3>
-			
-			<div class="meter nostripes <%= color %> ">
+<div id="heading">
+	<div id="nestedHeading">
+		<h2><%= shelter.getName() %></h2>
+	</div>
+</div>
+<div id="content">
+	<div id="nestedContent">
+		<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width: 100%;">
+		  <thead>
+		    <tr>
+		      <th class="mdl-data-table__cell--non-numeric">Name</th>
+		      <th>Gender</th>
+		      <th>Age</th>
+		      <th>Beds</th>
+		      <th>Phone</th>
+		      <th>&nbsp;</th>
+		    </tr>
+		  </thead>
+			<tbody>
+				<% if (clientList != null) for (Client c:clientList) { %>		
+				<tr>
+					<td><%= c.getFirstName() %> <%= c.getLastName() %></td>
+					<td><%= c.getGender() %></td>
+					<td><%= c.getAge() %></td>
+					<td><%= c.getBeds() %></td>
+					<td><%= c.getPhoneNumber() %></td>
+					<td><a class="mdl-button mdl-js-button mdl-js-ripple-effect" href="<%= contextPath %>/ShelterServlet?command=clearClient&shelterID=<%= shelter.getID() %>&clientID=<%= c.getId() %>"><i class="material-icons">cancel</i></a></td>
+				</tr>
+				<% } %>
+			</tbody>
+		</table>
+		
+		<form action="<%=request.getContextPath() %>/ShelterServlet?command=updateShelter" name="updateShelter" method="POST">
+		<div class="mdl-card mdl-shadow--2dp" style="width: 100%; margin-top: 65px; min-height: 0;">
+		  <div class="mdl-card__supporting-text">
+			<input type="hidden" name="Id" value="<%= shelter.getID() %>" />
+				<div class="meter nostripes <%= color %> ">
 				<span style="width: <%= percent %>%;">&nbsp;&nbsp;<%= shelter.getTotalBeds()-shelter.getAvailableBeds() %> / <%=shelter.getTotalBeds() %></span>
 			</div>
-			
-			<form action="<%=request.getContextPath() %>/ShelterServlet?command=updateShelter" name="updateShelter" method="POST">
-				<b>Update Number of Available Beds: </b>
-				<input type="number" name="availableBeds" value="<%= shelter.getAvailableBeds() %>" />
-				<input type="hidden" name="Id" value="<%= shelter.getID() %>" />
-				<button type="submit" class="btn btn-primary">Update</button>
-			</form>
-		</td>
-		<td>
-			<%
-				
-				//To style this table
-				//clientTable.setOptions("style='..' class='..'");
-				
-				String clientTableStr = clientTable.toHTML();
-				
-				if (clientList.size() == 0) {
-					clientTableStr = "<p>You have no pending clients</p>";
-				}
-			%>
-			
-			<%= clientTableStr %>
-			
-		</td>
-	</tr>
-</table>
-		
+			You have <input type="number" name="availableBeds" value="<%= shelter.getAvailableBeds() %>" style="width: 60px;"/> / <%= shelter.getTotalBeds() %> beds remaining.
+		  </div>
+		  <div class="mdl-card__actions mdl-card--border">
+		     <button type="submit" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">UPDATE</button>
+		  </div>
+		</div>
+		</form>
+	</div>
+	
+</div>
+
 <jsp:include page="/includes/footer.jsp" />
