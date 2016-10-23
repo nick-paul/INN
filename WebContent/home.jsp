@@ -127,7 +127,7 @@ form {
 	</table>
 </div>
 <div id="bottombar">
-	<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="loginButton">LOGIN</a>
+	<a href="<%= contextPath %>/ShelterServlet?command=shelterLogin" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="loginButton">SHELTER LOGIN</a>
 </div>
 <div id="map"></div>
 
