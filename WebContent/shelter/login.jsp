@@ -42,7 +42,6 @@ body {
 	
 	margin: 0 auto;
 	margin-top: 15px;
-	margin-left: 15%;
 	width: 300px;
 	height: 300px;
 	background: #fff;
