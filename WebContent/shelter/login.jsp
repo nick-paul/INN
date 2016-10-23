@@ -44,7 +44,7 @@ body {
 	margin-top: 15px;
 	margin-left: 15%;
 	width: 300px;
-	height: 300px;
+	height: 330px;
 	background: #fff;
 	border-radius: 5px; 
 	text-align: center;
@@ -150,8 +150,11 @@ label span {
 				<input type="password" name="password" class="password"/> 
 				<hr />
 				<button type="submit" class="button">Login</button>
+				<br></br>
+				<a href="<%=request.getContextPath() %>/shelter/newShelter.jsp">Click here to create a new shelter</a>
 				</form>
-			</div>
+			</div> 
+			
 		</td>
 	</tr>
 </table>
