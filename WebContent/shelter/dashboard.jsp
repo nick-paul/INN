@@ -11,6 +11,24 @@
 <title>Insert title here</title>
 </head>
 <body>
+<% ArrayList<Client> clientList=(ArrayList<Client>)request.getAttribute("clientList");
+   String contextPath = request.getContextPath();
+   Shelter shelter = (Shelter)request.getAttribute("shelter");
+
+	double ratioShelter = 1 -(double)shelter.getAvailableBeds() / (double)shelter.getTotalBeds();
+	double percent = ratioShelter * 100;
+	
+	String color = "";
+	if (percent < 33) {
+		color = "green";
+	} else if (percent < 70) {
+		color = "orange";
+	} else {
+		color = "red";
+	}
+%>
+
+
 
 	<style>
 		.meter { 
@@ -141,63 +159,57 @@
 		}
 	</style>
 
-<% Shelter shelter = (Shelter)request.getAttribute("shelter"); %>
 
-<h2><%= shelter.getName() %></h2>
-<% ArrayList<Client> clientList=(ArrayList<Client>)request.getAttribute("clientList");%>
-<% String contextPath = request.getContextPath(); %>
-
-
-<%
-	double ratioShelter = 1 -(double)shelter.getAvailableBeds() / (double)shelter.getTotalBeds();
-	double percent = ratioShelter * 100;
-	
-	String color = "";
-	if (percent < 33) {
-		color = "green";
-	} else if (percent < 70) {
-		color = "orange";
-	} else {
-		color = "red";
-	}
-%>
-
-<h3>You have <%= shelter.getAvailableBeds() %> beds remaining out of <%= shelter.getTotalBeds() %></h3>
-
-<div class="meter nostripes <%= color %> ">
-	<span style="width: <%= percent %>%;">&nbsp;&nbsp;<%= shelter.getTotalBeds()-shelter.getAvailableBeds() %> / <%=shelter.getTotalBeds() %></span>
-</div>
-
-<form action="<%=request.getContextPath() %>/ShelterServlet?command=updateShelter" name="updateShelter" method="POST">
-	<b>Update Number of Available Beds: </b>
-	<input type="number" name="availableBeds" value="<%= shelter.getAvailableBeds() %>" />
-	<input type="hidden" name="Id" value="<%= shelter.getID() %>" />
-	<button type="submit" class="btn btn-primary">Update</button>
-</form>
 
 
 
-<%
-	
+<h2><%= shelter.getName() %></h2>
 
-	Table clientTable = new Table("First", "Last", "Gender","Age","Beds","Phone number", "Clear");
-	
-	if (clientList != null) for (Client c:clientList) 
-	{		
-		clientTable.addRow(c.getFirstName(),c.getLastName(),c.getGender(),Integer.toString(c.getAge()),Integer.toString(c.getBeds()),c.getPhoneNumber(),
-				"<a href='" + contextPath + "/ShelterServlet?command=clearClient&shelterID=" + shelter.getID() 
-				+ "&clientID=" + c.getId() + "'>Clear</a>");
-	}
-	
-	String clientTableStr = clientTable.toHTML();
-	
-	if (clientList.size() == 0) {
-		clientTableStr = "<p>You have no pending clients</p>";
-	}
+<table width="100%">
+	<tr>
+		<td>
+			
+			<h3>You have <%= shelter.getAvailableBeds() %> beds remaining out of <%= shelter.getTotalBeds() %></h3>
+			
+			<div class="meter nostripes <%= color %> ">
+				<span style="width: <%= percent %>%;">&nbsp;&nbsp;<%= shelter.getTotalBeds()-shelter.getAvailableBeds() %> / <%=shelter.getTotalBeds() %></span>
+			</div>
+			
+			<form action="<%=request.getContextPath() %>/ShelterServlet?command=updateShelter" name="updateShelter" method="POST">
+				<b>Update Number of Available Beds: </b>
+				<input type="number" name="availableBeds" value="<%= shelter.getAvailableBeds() %>" />
+				<input type="hidden" name="Id" value="<%= shelter.getID() %>" />
+				<button type="submit" class="btn btn-primary">Update</button>
+			</form>
+		</td>
+		<td>
+			<%
+				Table clientTable = new Table("First", "Last", "Gender","Age","Beds","Phone number", "Clear");
+				
+				if (clientList != null) for (Client c:clientList) 
+				{		
+					clientTable.addRow(c.getFirstName(),c.getLastName(),c.getGender(),Integer.toString(c.getAge()),Integer.toString(c.getBeds()),c.getPhoneNumber(),
+							"<a href='" + contextPath + "/ShelterServlet?command=clearClient&shelterID=" + shelter.getID() 
+							+ "&clientID=" + c.getId() + "'>Clear</a>");
+				}
+				
+				//To style this table
+				//clientTable.setOptions("style='..' class='..'");
+				
+				String clientTableStr = clientTable.toHTML();
+				
+				if (clientList.size() == 0) {
+					clientTableStr = "<p>You have no pending clients</p>";
+				}
+			%>
+			
+			<%= clientTableStr %>
+			
+		</td>
+	</tr>
+</table>
+		
 
-%>
-
-<%= clientTableStr %>
 
 </body>
 </html>
