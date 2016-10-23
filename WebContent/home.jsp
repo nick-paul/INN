@@ -6,10 +6,20 @@
 
 <jsp:include page="/includes/header.jsp" />
 <style>
+html: {
+	margin: 0;
+	padding: 0;
+}
 #map {
-height: 400px;
-width: 100%;
-background-color: grey;
+	height: 100%;
+	width: 80%;
+	background-color: grey;
+	float: left;
+}
+#sidebar {
+	height: 100%;
+	width: 20%;
+	float: left;
 }
 .controls {
         margin-top: 10px;
@@ -60,6 +70,23 @@ background-color: grey;
 <p>
 Request a bed.
 </p>
+
+<div id="sidebar">
+	<p>
+	<form action="<%= contextPath %>/ClientServlet?command=getClientInfo" method="POST">
+     	
+		<input type="hidden" name="lat" id="latitude" value=""> <input type="hidden" name="lon" id="longitude" value="">
+	
+		<select id="shelterID" name="shelter" size="5">
+			<% if (shelters != null) for(Shelter shelter : shelters) { %>
+			<option value="<%= shelter.getID() %>" data-name="<%= shelter.getName() %>" data-beds="<%= shelter.getAvailableBeds() %>" data-lat="<%= shelter.getLat() %>" data-lng="<%= shelter.getLon() %>"><%= shelter.getName() %></option>
+			<% } %>
+		</select>
+		
+		<input type="submit" value="Get bed">
+	</form>
+</p>
+</div>
 
 <input id="pac-input" class="controls" type="text" placeholder="Search Box">
 <div id="map"></div>
@@ -206,25 +233,11 @@ Request a bed.
 		$(function(){
 			$('#shelterID').on('change', function() {
 				$('#latitude').val($(this).find(':selected').data('lat'));
-				$('#longitude').val($(this).find(':selected')s.data('lng'));
+				$('#longitude').val($(this).find(':selected').data('lng'));
 			});
 		});
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBsFbFzxam9hIy23IpUXvLgf4idAU10Wk&callback=initMap&libraries=places"></script>
-<p>
-	<form action="<%= contextPath %>/ClientServlet?command=getClientInfo" method="POST">
-     	
-		<input type="hidden" name="lat" id="latitude" value=""> <input type="hidden" name="lon" id="longitude" value="">
-	
-		<select id="shelterID" name="shelter" size="5">
-			<% if (shelters != null) for(Shelter shelter : shelters) { %>
-			<option value="<%= shelter.getID() %>" data-name="<%= shelter.getName() %>" data-beds="<%= shelter.getAvailableBeds() %>" data-lat="<%= shelter.getLat() %>" data-lng="<%= shelter.getLon() %>"><%= shelter.getName() %></option>
-			<% } %>
-		</select>
-		
-		<input type="submit" value="Get bed">
-	</form>
-</p>
         
 <jsp:include page="/includes/footer.jsp" />
  
