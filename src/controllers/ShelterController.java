@@ -114,6 +114,8 @@ public class ShelterController
 		return "shelter/dashboard.jsp";
 	}
 	
+	
+	//TODO: Add this function to the database
 	public static Shelter getShelter(int shelterID) {
 
 		//Yes I know this is horrible, but we are running low on time

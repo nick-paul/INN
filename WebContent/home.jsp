@@ -115,7 +115,7 @@ form {
 					    <input type="hidden" name="shelterID" value="<%= shelter.getID() %>">
 					    <input type="hidden" name="lat" class="latitude" value="">
 					    <input type="hidden" name="lon" class="longitude" value="">
-					    <!-- <a class="mdl-button mdl-js-button mdl-js-ripple-effect"><i class="material-icons">phone</i></a> --><input type="submit" value="REQUEST" class="formButton mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+					    <!-- <a class="mdl-button mdl-js-button mdl-js-ripple-effect"><i class="material-icons">phone</i></a> --><input type="submit" value="MORE" class="formButton mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
 				    </form>
 			    </td>
 		  	</tr>

@@ -1,3 +1,4 @@
+<%@page import="beans.Shelter"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <% String contextPath = request.getContextPath(); %>
@@ -17,7 +18,7 @@
 	#heading {
 		background-color: #1565C0;
 		width: 100%;
-		height: 200px;
+		height: 270px;
 		margin: 0;
 		padding: 0;
 		color: white;
@@ -50,14 +51,21 @@
 <%Integer id=(Integer)(request.getAttribute("shelterID")); %>
 <%Double lat=(Double)(request.getAttribute("lat")); %>
 <%Double lon=(Double)(request.getAttribute("lon")); %>
+<%Shelter shelter = (Shelter)(request.getAttribute("shelter")); %>
+
 
 <div id="heading">
 	<div id="nestedHeading">
-		<h2>Request a Space</h2>
+		<h3><%= shelter.getName() %></h3>
+		<h4><%= shelter.getAddress() %> &#8226; <%= shelter.getCity() %> &#8226; <%= shelter.getState() %> &#8226; <%= shelter.getZip() %></h4>
+		<p><%= shelter.getComments() %><br /> Email: <%=shelter.getEmail() %> Phone: <%= shelter.getPhoneNumber() %><p>
+		<p><b>There are currently <%=shelter.getAvailableBeds() %> available beds out of <%= shelter.getTotalBeds() %></b></p>
 	</div>
 </div>
 <div id="content">
 	<div id="nestedContent">
+			<h2>Request a Space</h2>
+	
 	<form action="<%= contextPath %>/ClientServlet?command=newClient" method="POST">
 		<div class="mdl-card mdl-shadow--2dp" style="width: 100%; min-height: 0;">
 		  <div class="mdl-card__supporting-text" style="padding: 32px;">

@@ -1,9 +1,13 @@
 package controllers;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 
 import beans.Client;
+import beans.Shelter;
 import db.DBClient;
+import db.DBShelter;
 
 
 public class ClientController {
@@ -56,10 +60,28 @@ public class ClientController {
 		int id=stringToInt(request.getParameter("shelterID"));
 		double lat=stringToDouble(request.getParameter("lat"));
 		double lon=stringToDouble(request.getParameter("lon"));
+		
+		Shelter shelter = getShelter(id);
+		
+		request.setAttribute("shelter", shelter);
 		request.setAttribute("shelterID", id);
 		request.setAttribute("lat",lat);
 		request.setAttribute("lon", lon);
 		return ("client/newClient.jsp");
+	}
+	
+	
+	//TODO: Add this function to the database
+	public static Shelter getShelter(int shelterID) {
+
+		//Yes I know this is horrible, but we are running low on time
+		ArrayList<Shelter> shelters = DBShelter.getAllShelters();
+		for (Shelter s : shelters) {
+			if (s.getID() == shelterID) {
+				return s;
+			}
+		}
+		return null;
 	}
 	
 }
