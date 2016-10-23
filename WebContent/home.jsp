@@ -43,7 +43,7 @@ form {
 	padding: 0;
 	z-index: 1;
 	position: absolute;
-	width: 500px;
+	width: 550px;
 	margin-right: 12px;
 }
 #bottombar {
