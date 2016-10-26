@@ -1,6 +1,6 @@
 # INN
 
-***IN Now**: an easy to use shelter finder and manager for homeless individuals and shelter offices*
+**IN Now**: *an easy to use shelter finder and manager for homeless individuals and shelter offices*
 
 Devpost Link: [https://devpost.com/software/globalhack](https://devpost.com/software/globalhack)
 
