@@ -1,6 +1,7 @@
 <%@ page import ="beans.Shelter" %>
 <%@ page import ="java.util.ArrayList" %>
 <% String contextPath = request.getContextPath(); %>
+<% String googleMapsApiKey = ""; %>
 <% ArrayList<Shelter> shelters = (ArrayList<Shelter>)request.getAttribute("shelterList"); %>
 <jsp:include page="/includes/header.jsp" />
 
@@ -283,7 +284,7 @@ form {
 			});
 		});
     </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBsFbFzxam9hIy23IpUXvLgf4idAU10Wk&callback=initMap&libraries=places"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=<%= googleMapsApiKey %>&callback=initMap&libraries=places"></script>
         
 <jsp:include page="/includes/footer.jsp" />
  
